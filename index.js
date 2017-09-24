@@ -1,41 +1,4 @@
-//year ， 外籍勞工總數
-var datatotal = [
-    [2002, 303684],
-    [2003, 300150],
-    [2004, 314034],
-    [2005, 327396],
-    [2006, 338755],
-    [2007, 357937],
-    [2008, 365060],
-    [2009, 351016],
-    [2010, 379653],
-    [2011, 425660],
-    [2012, 445579],
-    [2013, 489134],
-    [2014, 551596],
-    [2015, 587940],
-    [2016, 624768],
-    [2017, 657983]
-];
-//各年齡層外勞人數，台灣對應各年齡層勞動總數
-var agedata = [
-    [60434,190730,48369,4039,82,1070000,2765000,2851000,1965000,804000],
-    [54912,181842,59078,4226,67,1013000,2797000,2876000,2071000,816000],
-    [52319,181641,75133,4854,70,989000,2853000,2915000,2182000,847000],
-    [56232,183986,81131,5923,106,944000,2903000,2934000,2280000,882000],
-    [63697,188588,79564,6751,133,902000,2962000,2963000,2343000,942000],
-    [69887,198460,81627,7767,177,870000,3013000,2960000,2403000,1048000],
-    [73945,197770,84051,9049,231,821000,3053000,2946000,2463000,1120000],
-    [63552,190091,86942,10112,308,749000,3028000,2878000,2462000,1162000],
-    [64986,204866,97230,12165,397,758000,3072000,2891000,2517000,1255000],
-    [76912,227056,107486,13806,389,763000,3096000,2920000,2587000,1342000],
-    [78786,235954,115255,15101,470,780000,3057000,2963000,2631000,1429000],
-    [92783,251649,125797,18279,610,782000,3020000,2992000,2660000,1513000],
-    [112694,278390,138042,21643,816,774000,2969000,3016000,2693000,1627000],
-    [118155,296549,148137,24085,1001,796000,2932000,3058000,2714000,1698000],
-    [119649,312686,162113,29102,1202,814000,2864000,3104000,2736000,1749000],
-    [121448,325966,175579,33584,1390,953000,2955000,3261000,2817000,1827000],
-];
+
 //產業外勞與社福外勞逐年人數
 var data = [
     ["印尼", 11722, 8546, 5824, 7188, 9646, 13871, 16650, 18346, 21313, 27329, 33724, 45919, 54907, 59261, 61645, 67019],
@@ -49,51 +12,113 @@ var data = [
     ["越南", 15263, 40397, 71783, 63956, 46767, 34414, 32912, 29914, 26542, 25688, 21499, 20572, 19974, 18919, 22927, 25794],
     ["其他", 2, 2, 48, 49, 16, 7, 3, 0, 1, 1, 1, 1, 3, 2, 1, 0],
 ];
-// var data ={
-//     year:[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017],
-//     Foreign:[303684,300150,314034,327396,338755,357937,365060,351016,379653,425660,445579,489134,551596,587940,624768,657983,],
-//     Taiwanese:[9969000,10076000,10240000,10371000,10522000,10713000,10853000,10917000,11070000,11200000,11341000,11445000,11535000,11638000,11727000,11770000],
-//     country:{
-//     Indonesia:[93212,56437,27281,49094,85223,115490,127764,139404,347332,175409,191127,213234,229491,236526,245180,254515],
-//     Philippines:[69426,81355,91150,95703,90054,86423,80636,72077,77538,82841,86786,89024,111533,123058,135797,145214],
-//     Tai:[111538,104728,105281,98322,92894,86948,75584,61432,65742,71763,67611,61709,59933,58372,58869,60678],
-//     Vietnam:[29473,57603,90241,84185,70536,69043,81060,78093,80030,95643,100050,125162,150632,169981,184920,197575],
-//     other:[35,27,81,92,48,33,16,10,11,4,5,5,7,3,2,0]
-//     }
-// };
-var dataline = [
-    {x: 2002, y1: -0.3, y2:5.17}, {x: 2003, y1: -1.16, y2:4.99},
-    {x: 2004, y1: 4.63, y2:4.44}, {x: 2005, y1: 4.25, y2:4.13},
-    {x: 2006, y1: 3.47, y2:3.91}, {x: 2007, y1: 5.66, y2:3.91},
-    {x: 2008, y1: 1.99, y2:4.14}, {x: 2009, y1: -3.85, y2:5.85},
-    {x: 2010, y1: 8.16, y2:5.21}, {x: 2011, y1: 12.12, y2:4.39},
-    {x: 2012, y1: 4.68, y2:4.24}, {x: 2013, y1: 9.77, y2:4.18},
-    {x: 2014, y1: 12.77, y2:3.96}, {x: 2015, y1: 6.59, y2:3.78},
-    {x: 2016, y1: 6.26, y2:3.92}, {x: 2017, y1: 9.46, y2:3.84},
-];
-d3.csv("data.csv",function(data) {console.log(data);});
-//linechart
+
+// var data1 = [
+//     {Indonesia_c:81490, Indonesia_d :11722,Philippines_c:21223,Philippines_d:48203, Tai_c:2733,Tai_d:108805,Vietnam_c :15263,
+//         Vietnam_d:14210,growth_rate:-0.3,migrant:303684, other_c:2,other_d:33,unemploy_rate:5.17,year:2002},
+//     {Indonesia_c:47891,Indonesia_d:8546,Philippines_c:29347,Philippines_d:52008,Tai_c:2961,Tai_d:101767,Vietnam_c:40397,
+//         Vietnam_d:17206,growth_rate:-1.16,migrant:300150,other_c:2,other_d:25,unemploy_rate:4.99,year:2003},
+//     {Indonesia_c:21457, Indonesia_d:5824,Philippines_c:34446,Philippines_d:56704,Tai_c:3333,Tai_d:101948,Vietnam_c:71783,
+//         Vietnam_d:18458,growth_rate:4.63,migrant:314034,other_c:48,other_d:33,unemploy_rate:4.44,year:2004},
+//     {Indonesia_c:41906,Indonesia_d:7188,Philippines_c:35047,Philippines_d:60656,Tai_c:3057,Tai_d:95265, Vietnam_c:63956,
+//         Vietnam_d:20229,growth_rate:4.25,migrant:327396,other_c:49,other_d:43,unemploy_rate:4.13,year:2005},
+//     {Indonesia_c:75577,Indonesia_d:9646,Philippines_c:29107,Philippines_d:60947,Tai_c:2318,Tai_d:90576,Vietnam_c:46767,
+//         Vietnam_d:23769,growth_rate:3.47,migrant:338755,other_c:16,other_d :32,unemploy_rate:3.91, year:2006},
+//     {Indonesia_c:101619,Indonesia_d:13871,Philippines_c :24369,Philippines_d:62054,Tai_c:1819,Tai_d:85129,Vietnam_c :34414,
+//         Vietnam_d:34629,growth_rate:5.66,migrant:357937,other_c:7,other_d:26,unemploy_rate :3.91,year:2007},
+//     {Indonesia_c:111114,Indonesia_d:16650,Philippines_c  :22894,Philippines_d:57742,Tai_c:1504,Tai_d:74080,Vietnam_c:32912,
+//         Vietnam_d:48148, growth_rate:1.99,migrant:365060,other_c:3,other_d:13,unemploy_rate:4.14,year:2008},
+//     {Indonesia_c:121058,Indonesia_d:18346,Philippines_c:22676,Philippines_d:49401,Tai_c:1295,Tai_d:60137,Vietnam_c:29914,
+//         Vietnam_d:48179,growth_rate:-3.85,migrant:351016,other_c:0,other_d:10, unemploy_rate:5.85,year :2009},
+//     {Indonesia_c:135019,Indonesia_d:21313,Philippines_c:23320,Philippines_d:54218,Tai_c:1226,Tai_d :64516,Vietnam_c:26542,
+//         Vietnam_d:53488,growth_rate :8.16,migrant:379653,other_c:1,other_d:10,unemploy_rate:5.21,year:2010},
+//     {Indonesia_c:148080,Indonesia_d:27329,Philippines_c:23017, Philippines_d:59824,Tai_c:1068,Tai_d:70695,Vietnam_c:25688,
+//         Vietnam_d:69955,growth_rate:12.12,migrant:425660,other_c:1,other_d:3,unemploy_rate:4.39,year:2011},
+//     {Indonesia_c:157403,Indonesia_d:33724,Philippines_c:22921,Philippines_d:63865,Tai_c:870,Tai_d:66741,Vietnam_c:21499,
+//         Vietnam_d:78551,growth_rate:4.68,migrant:445579,other_c:1,other_d:4,unemploy_rate:4.24,year:2012},
+//     {Indonesia_c:167315,Indonesia_d:45919,Philippines_c :21582,Philippines_d:67442,Tai_c:745,Tai_d:60964,Vietnam_c:20572,
+//         Vietnam_d :104590,growth_rate:9.77,migrant:489134,other_c:1,other_d:4,unemploy_rate:4.18,year:2013},
+//     {Indonesia_c:174584,Indonesia_d:54907,Philippines_c :24784,Philippines_d:86749,Tai_c:666,Tai_d :59267,Vietnam_c :19974,
+//         Vietnam_d:130658,growth_rate :12.77,migrant:551596,other_c:3,other_d:4,unemploy_rate:3.96,year:2014},
+//     {Indonesia_c:177265,Indonesia_d :59261,Philippines_c :27613,Philippines_d:95445, Tai_c:557,Tai_d:57815,Vietnam_c:18919,
+//         Vietnam_d:151062, growth_rate:6.59,migrant:587940,other_c:2,other_d:1,unemploy_rate :3.78,year :2015},
+//     {Indonesia_c:183535,Indonesia_d:61645,Philippines_c:30268, Philippines_d:105529,Tai_c:560,Tai_d :58309,Vietnam_c:22927,
+//         Vietnam_d :161993,growth_rate :6.26,migrant:624768,other_c :1,other_d:1, unemploy_rate :3.92,year:2016},
+//     {Indonesia_c:187496,Indonesia_d:67019,Philippines_c :31181,Philippines_d:114033,Tai_c:541,Tai_d:60137,Vietnam_c  :25794,
+//         Vietnam_d:171781, growth_rate:9.46,migrant :657983,other_c :0,other_d:1,unemploy_rate:3.84,year:2017}
+//     ];
+d3.csv("data.csv",function(data) {console.table(data);});
+
+//color
+var color = d3.scale.category20();
+
+/*LineChart*/ 
+//append svg ,g and set position
 var width = 1120,height = 300;
 var padding = {top:30,right:50,bottom:50,left:50};
 var svgLineChart = d3.select("#linechart").append('svg');
 svgLineChart = d3.select("svg").attr({'width':width,'height':height}); 
 var LineChart = svgLineChart.append('g');
 LineChart.attr('transform',"translate(" + padding.top + "," + padding.left + ')');
-var color = d3.scale.category20();
 
+//圖例線條
+LineChart.append('line').attr('id', 'growth_rate');
+LineChart.select('#growth_rate')
+    .attr({'x1': 20,
+            'y1': 0,
+            'x2': 50,
+            'y2': 0
+    }).style({
+            'stroke': '#A71D31',
+            'stroke-width': 2
+});
+LineChart.append('line').attr('id', 'unemployee_rate');
+LineChart.select('#unemployee_rate')
+    .attr({'x1': 20,
+    'y1': 15,
+    'x2': 50,
+    'y2': 15
+}).style({
+    'stroke': 'orange',
+    'stroke-width': 2
+});
+//圖例文字
+LineChart.append('text')
+.attr('id', 'growth_rate_w');
+LineChart.select('#growth_rate_w')
+.attr({
+    'x': '50',
+    'y': '2',
+    'fill': 'black',
+    'font-size': '11px',
+    'font-weight': 'normal',
+    'font-family': '微軟正黑體'
+})
+.text('外籍移工人數成長率');
+LineChart.append('text').attr('id', 'unemployee_rate_w');
+LineChart.select('#unemployee_rate_w')
+.attr({
+    'x': '50',
+    'y': '18',
+    'fill': 'black',
+    'font-size': '11px',
+    'font-weight': 'normal',
+    'font-family': '微軟正黑體'
+})
+.text('失業率');
 //x,y軸比例尺
-var xScale = d3.scale.linear().domain(d3.extent(dataline,function(d){
-    return d.x;
+var xScale = d3.scale.linear().domain(d3.extent(data1,function(d){
+    return d.year;
 })).range([0,width - padding.left - padding.right]);
-var yScale = d3.scale.linear().domain([d3.min(dataline,function(d){
-    return d.y1;
-}),d3.max(dataline,function(d){
-    return d.y1;
+var yScale = d3.scale.linear().domain([d3.min(data1,function(d){
+    return d.growth_rate;
+}),d3.max(data1,function(d){
+    return d.growth_rate;
 })]).range([height - padding.top - padding.bottom,0]);
 //創建x,y軸
 var xAxis = d3.svg.axis().scale(xScale).orient('bottom');
-var yAxis = d3.svg.axis().scale(yScale).orient('left');
-
+var yAxis = d3.svg.axis().scale(yScale).orient('left').tickFormat(function(d){return d+'%';});
+//call axis
 LineChart.append('g').attr('class','axis').attr('transform','translate(0,' +(height - padding.top -2*padding.bottom)+')')
             .call(xAxis).attr({'stroke':'#000','stroke-width':'2px','fill':'none'})
             .selectAll('text')
@@ -110,64 +135,101 @@ LineChart.append('g').attr('class','axis').call(yAxis)
             'stroke': 'none',
             'font-family': 'monospace'
         });;
+
 //折線(外勞成長率)
-var line_fw = d3.svg.line().x(function(d){return xScale(d.x)}).y(function(d){return yScale(d.y1);}).interpolate('linear');
-LineChart.append('path').attr('class','line').attr('d',line_fw(dataline))
-        .attr({'stroke':'#BDBDBD','stroke-width':'0.5px','fill':'none'});
+var Line = [];
+Line[0] = d3.svg.line().x(function(d){return xScale(d.year)}).y(function(d){return yScale(d.growth_rate);}).interpolate('linear');
+LineChart.append('path').attr('class','line').attr('d',Line[0](data1))
+        .attr({'stroke':'#A71D31','stroke-width':'1px','fill':'none'});
 //折線(台灣失業率)
-var line_une = d3.svg.line().x(function(d){return xScale(d.x)}).y(function(d){return yScale(d.y2);}).interpolate('linear');
-LineChart.append('path').attr('class','line').attr('d',line_une(dataline))
-        .attr({'stroke':'#000','stroke-width':'0.5px','fill':'none'});
+Line[1] = d3.svg.line().x(function(d){return xScale(d.year)}).y(function(d){return yScale(d.unemploy_rate);}).interpolate('linear');
+LineChart.append('path').attr('class','line').attr('d',Line[1](data1))
+        .attr({'stroke':'orange','stroke-width':'1px','fill':'none'});
 //標記點(外勞成長率)
-LineChart.selectAll('circle')
-        .data(dataline)
+LineChart.append('g').selectAll('circle')
+        .data(data1)
         .enter()
         .append('circle')
         .attr('cx',function(d){
-            return xScale(d.x);
+            return xScale(d.year);
         })
         .attr('cy',function(d){
-            return yScale(d.y1);
+            return yScale(d.growth_rate);
         })
         .attr('r',4)
-        .attr('fill',function(d,i){
-            return color(i);
-        })
+        .attr('fill','#A71D31')
         .attr('opacity',function(d,i){
             if(i!=0)
                 return 0.4;
         })
-       . attr('class','fw');
+        .attr('id',function(d,i){return 'dot'+i;});
+//標記點(台灣失業率)
+LineChart.append('g').selectAll('circle')
+        .data(data1)
+        .enter()    
+        .append('circle')
+        .attr('cx',function(d){
+                    return xScale(d.year);
+        })
+        .attr('cy',function(d){
+                    return yScale(d.unemploy_rate);
+        })
+        .attr('r',4)
+        .attr('fill','orange')
+        .attr('opacity',function(d,i){
+        if(i!=0)
+            return 0.2;
+        })
+        .attr('id',function(d,i){return 'dot'+i;});
+       
 //標記文字
-LineChart.append('g').attr('class','mark');
-LineChart.select('.mark').selectAll('text')
-         .data(dataline)
-         .enter()
-         .append('text')
-         .text(function(d){return d.y1})
-         .attr({
-            'x': function(d){
-                return xScale(d.x);
-            },
-            'y': function(d){
-                return yScale(d.y1);
-            },
-            'fill': "gray",
-            'font-size': '12px',
-            'font-weight': 'bold',
-            'font-family': 'monospace',
-            'visibility':'hidden'
-        });
+var offsetY = 1;
+LineChart.append('g').attr('class','mark1');
+LineChart.append('g').attr('class','mark2');
+for(var i =1;i<3;i++){
+    LineChart.select('.mark'+i).selectAll('text')
+    .data(data1)
+    .enter()
+    .append('text')
+    .attr({
+       'x': function(d){
+           return xScale(d.year);
+       },
+       'fill': "black",
+       'font-size': '12px',
+       'font-weight': 'bold',
+       'font-family': 'monospace',
+       'visibility':'hidden',
+       'id':function(d,i){return 'mark'+i;}
+   });
+}
+LineChart.select('.mark1').selectAll('text').text(function(d){return d.growth_rate}).attr('y',function(d){
+    if(Math.floor(d.growth_rate,0) ==Math.floor(d.unemploy_rate,0)){
+        return yScale(offsetY+d.growth_rate);
+    }
+    else
+        return yScale(d.growth_rate);
+})
+LineChart.select('.mark2').selectAll('text').text(function(d){return d.unemploy_rate}).attr('y',function(d){
+    if(Math.floor(d.growth_rate,0) ==Math.floor(d.unemploy_rate,0)){
+        return yScale(d.unemploy_rate-offsetY);
+    }
+    else
+        return yScale(d.unemploy_rate);
+})
 
-//TimeLine
+
+/*TimeLine*/
+//append svg,g and set size
 var svgTime = d3.select("#timeLine").append('svg');
 svgTime = d3.select("#timeLine").select('svg').attr({
     'width': 1500,
     'height': 50
 });
-var tL = svgTime.append('g');
+var TimeLine = svgTime.append('g');
+
 //Line
-tL.append('line').attr({
+TimeLine.append('line').attr({
     'x1': 70,
     'y1': 20,
     'x2': 1165,
@@ -178,12 +240,12 @@ tL.append('line').attr({
 });
 
 //year
-tL.selectAll('text')
-    .data(datatotal)
+TimeLine.selectAll('text')
+    .data(data1)
     .enter()
     .append('text')
-    .text(function (d, i) {
-        return d[0];
+    .text(function (d) {
+        return d.year;
     })
     .attr({
         'x': function (d, i) {
@@ -196,8 +258,8 @@ tL.selectAll('text')
         'font-family': 'monospace'
     });
 //circle
-tL.selectAll('circle')
-    .data(datatotal)
+TimeLine.selectAll('circle')
+    .data(data1)
     .enter()
     .append('circle')
     .attr({
@@ -211,11 +273,16 @@ tL.selectAll('circle')
         },
         'opacity': 0.7
     })
+
+var sumPerYear = document.getElementById("desc2"); 
+var node = document.createTextNode('2002年 外籍移工人數達 303684人');
+/*chartbar*/
 var w = $(window).width() *0.5;
 var h = 150;
+
 //調整比例
-var scaleX = d3.scale.linear().range([0, w]).domain([0, 200000]);
-var scaleX1 = d3.scale.linear().range([0, 1.5*w]).domain([0, 300000]);
+var scaleX = d3.scale.linear().range([0, w]).domain([0, 200000]);//產業、社福
+var scaleX_sum = d3.scale.linear().range([0, 1.5*w]).domain([0, 300000]);//總數
 var scaleY = d3.scale.linear().range([0, h]).domain([0, 190]);
 
 //axis
@@ -226,10 +293,9 @@ axis = d3.select('#axis').select('svg').attr({
 });
 var g1_axis = axis.append('g');
 var axisX = d3.svg.axis()
-                .scale(scaleX1)
+                .scale(scaleX_sum)
                 .orient("top")
-                .tickValues([10000,50000,100000,150000,200000,250000,300000]);
-                
+                .tickValues([10000,50000,100000,150000,200000,250000,300000]);                
 g1_axis.call(axisX)
     .attr('transform', 'translate(150,30)')
     .attr({
@@ -243,31 +309,30 @@ g1_axis.call(axisX)
         'stroke': 'none',
         'font-family': 'monospace'
     });
-
-//chartbar
-
-var svg1 = d3.select("#MW_in_TW").append("svg");
-svg1 = d3.select("#MW_in_TW").select("svg")
+//append svg,g
+var svgBar = d3.select("#MW_in_TW").append("svg");
+svgBar = d3.select("#MW_in_TW").select("svg")
     .attr({
         'x': 0,
         'y': 0,
         width: 2* w,
         height: 200
     });
-var g1 = svg1.append('g');
+var chartBar = svgBar.append('g');
 
 //insert into path to draw
-g1.selectAll("path")
+
+chartBar.selectAll("path")
     .data(data)
     .enter()
     .append("path");
 
-
-
 var pos = [];
+var country = ['Indonesia_c','Philippines_c','Tai_c','Vietnam_c','other_c','Indonesia_d' ,'Philippines_d','Tai_d','Vietnam_d','other_d'];
+var countryChinese = ['印尼','菲律賓','泰國','越南','其他'];
 //設定元素參數
-g1.selectAll('path')
-    .attr("d", function (d, i) {
+chartBar.selectAll('path')
+    .attr("d", function(d,i) {
         if (i < 5) { //產業
             var x1 = 150; //bar 起始點
             var x2 = 150; //bar 終點
@@ -285,13 +350,14 @@ g1.selectAll('path')
             "L" + x2 + " " + y2 +
             "L" + x1 + " " + y2 + "Z"
         );
+
     })
     .attr('fill', function (d, i) {
         if (i < 5) return '#A7B368';
         else return '#F6CAB3';
     })
     .transition().duration(1000).ease('poly', '3')
-    .attr("d", function (d, i) {
+    .attr("d", function (d,i) {
         if (i < 5) {
             var x1 = 150; //bar 起始點
             var x2 = 150 + scaleX(d[1]); //bar 終點
@@ -319,9 +385,9 @@ g1.selectAll('path')
         }
     });
 
-//圖例
-g1.append('rect').attr('id', 'industry');
-g1.select('#industry')
+//圖例方塊
+chartBar.append('rect').attr('id', 'industry');
+chartBar.select('#industry')
     .attr('width', 15)
     .attr('height', 15)
     .attr('fill', '#A7B368')
@@ -329,9 +395,8 @@ g1.select('#industry')
         'x': 150,
         'y': 160
     });
-g1.append('rect').attr('id', 'caregiver');
-
-g1.select('#caregiver')
+chartBar.append('rect').attr('id', 'caregiver');
+chartBar.select('#caregiver')
     .attr('width', 15)
     .attr('height', 15)
     .attr('fill', '#F6CAB3')
@@ -340,8 +405,8 @@ g1.select('#caregiver')
         'y': 160
     });
 
-
-g1.selectAll('text')
+//長條圖國家文字
+chartBar.selectAll('text')
     .data(data)
     .enter()
     .append('text')
@@ -356,26 +421,27 @@ g1.selectAll('text')
         'font-family': '微軟正黑體'
     })
     .text(function (d, i) {
-        if (i < 5) return d[0]
+        if (i < 5) return d[0];
     });
-
-
-var sum = 0;
-sum = datatotal[0][1];
+//長條圖比例
+var sum = 0; 
 var dev = [];
 var num = [];
 for (var i = 0; i < data.length; i++) {
-    g1.append('text')
+    chartBar.append('text')
         .attr('class', 'ratio')
 }
-g1.selectAll('.ratio')
+chartBar.selectAll('.ratio')
     .data(data)
     .attr('fill', 'white')
     .transition().duration(2000)
     .text(function (d, i) {
         if (i < 5) {
             dev.push(d[1]);
+         
         } else {
+            sum = data1[0].migrant;
+          
             var ratio = 100 * (d[1] + dev[i - 5]) / sum;
             num.push(d[1] + dev[i - 5]);
             return ratio.toFixed(2) + "%"
@@ -394,9 +460,9 @@ g1.selectAll('.ratio')
         'font-family': 'monospace'
     });
 //圖例文字
-g1.append('text')
+chartBar.append('text')
     .attr('id', 'industry_w');
-g1.select('#industry_w')
+chartBar.select('#industry_w')
     .attr({
         'x': '170',
         'y': '173',
@@ -406,8 +472,8 @@ g1.select('#industry_w')
         'font-family': '微軟正黑體'
     })
     .text('產業外籍勞工');
-g1.append('text').attr('id', 'caregiver_w');
-g1.select('#caregiver_w')
+chartBar.append('text').attr('id', 'caregiver_w');
+chartBar.select('#caregiver_w')
     .attr({
         'x': '270',
         'y': '173',
@@ -417,20 +483,24 @@ g1.select('#caregiver_w')
         'font-family': '微軟正黑體'
     })
     .text('社福外籍勞工');
+
 //逐年變動長條圖
-pos = [];
-dev = [];
-num = [];
-tL.selectAll('circle')
+pos = [];//儲存產業外勞數值
+dev = [];//for account ratio
+num = [];//industry +caregiver
+
+sumPerYear.appendChild(node);
+TimeLine.selectAll('circle')
     .on('mouseover', function (d, i) {
+        $("#desc2").text(d.year+'年 外籍移工人數達 '+d.migrant+'人');
         //bigger circle
         d3.select(this).attr({
             'r': 10,
             'opacity':1
         });
         //changing chartbar
-        g1.selectAll('path')
-            .transition().duration(1000).ease('poly', '3')
+        chartBar.selectAll('path')
+            .transition().duration(1000).ease('poly', '2')
             .attr("d", function (d1, i1) {
                 if (i1 < 5) {
                     var x1 = 150; //bar 起始點
@@ -453,11 +523,9 @@ tL.selectAll('circle')
                     "L" + x1 + " " + y2 + "Z"
                 );
             });
-        var sum = 0;
-        sum = datatotal[i][1];
-        g1.selectAll('.ratio')
-            .attr('fill', 'white')
-            .transition().duration(1500)
+        chartBar.selectAll('.ratio')
+            .attr('opacity', '0')
+            .transition().duration(1000).ease('poly', '2')
             .text(function (d1, i1) {
                     if (i1 == 0) {
                         dev = [];
@@ -470,40 +538,24 @@ tL.selectAll('circle')
                         num.push(d1[i + 1] + dev[i1 - 5]);
                         return ratio.toFixed(2) + "%"
                     }
-
                 }
-
             )
             .attr('x', function (d1, i1) {
                 if (i1 >= 5) {
                     return 160 + scaleX(num[i1 - 5])
                 }
             })
-            .attr('fill', 'black')
-        //Linechart
-        LineChart.select('.mark').select('text').attr('visibility',function(d3,i3){
-            if(i == i3){
-                return 'visible';
-            }
-        });
-        LineChart.selectAll('circle').attr('fill',function(d2,i2){
-                return color(i2);
-        }).attr('opacity',function(d2,i2){
-            if(i!=i2)
-                return 0.4;
-            else
-                return 1;
-        });
-    })
-    .on('mouseout', function (d) {
+            .attr('opacity', '1');
+        //Linechart     
+        LineChart.selectAll('#mark'+i).attr('visibility','visible');
+        LineChart.selectAll('#dot'+i).attr('opacity','1');})
+    .on('mouseout', function (d,i) {
         d3.select(this).attr({
             'r': 7,
-            'opacity':0.5
+            'opacity':0.4
         });
-        LineChart.select('.mark').selectAll('text').attr('visibility',function(d3,i3){
-            if(i != i3)
-                return 'hidden';
-        });
+        LineChart.selectAll('#mark'+i).attr('visibility','hidden');
+        LineChart.selectAll('#dot'+i).attr('opacity','0.2');
     });
 
 

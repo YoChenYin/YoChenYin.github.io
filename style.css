@@ -1,0 +1,44 @@
+.title{
+    font-size: 14px;
+    font-family: 微軟正黑體;
+    font-weight: bold;
+    text-align: center;
+    
+}
+#linechart{
+    width: 100%;
+    height: 300px;
+    margin-top: 10px;
+    margin-left:4%;
+}
+#timeLine{
+    width: 100%;
+    height: 50px;
+    margin-bottom: 30px;
+} 
+#axis{
+    width:100%;
+    height: 50px;
+    margin-bottom: 5px;
+    
+}
+#MW_in_TW{
+    width: 100%;
+    height :200px;
+    margin-bottom: 50px;
+   
+}
+ 
+.desc{   
+    fill: black;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: '微軟正黑體';
+    margin-left: 5%;
+}
+#desc1,#desc2{   
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 4px;
+    margin-left: 15px;
+}
