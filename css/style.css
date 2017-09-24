@@ -29,10 +29,16 @@
    
 }
  
-#desc1,#desc2{   
+.desc{   
     fill: black;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: bolder;
     font-family: '微軟正黑體';
     margin-left: 5%;
+}
+#desc1,#desc2{   
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 4px;
+    margin-left: 15px;
 }
