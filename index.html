@@ -1,30 +1,252 @@
 <!DOCHTML>
 <html>
-    <head>
-        <meta charset="utf-8">
 
-        <title>外籍勞工</title>
-        
-        <link href="css/style.css" rel="stylesheet">
-        <script type = "text/javascript" src="https://code.jquery.com/jquery-1.12.4.js" ></script>
-        <script type = "text/javascript" src="https://d3js.org/d3.v3.min.js" ></script>
-            
-       <!-- <script src="d3.min.js"></script>-->
+<head>
+
+    <meta charset="utf-8">
+
+    <title>外籍勞工</title>
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+
+</head>
+<style>
+    #header {
        
-    </head>
-    <body>
-        <div class="title">
-        <h1>在台外籍勞工</h1>
-        </div>
-        <div class = "desc">1.來台外籍勞工逐年成長率與台灣失業率。<div id = "desc1">外籍移工真的壓縮到台灣就業機會嗎?</div> </div>
-        <div id = "linechart"></div>
-        <div id = "timeLine"> </div>
-        <div class = "desc">2.開放外勞輸出國家人數比例。<div id = "desc2"></div> </div>
-        <div id = "axis"></div>
-        <div id = "MW_in_TW"> </div>
-   
+        height: 80px;
+        font-size: 28px;
+        font-family: 微軟正黑體;
+        font-weight: bold;
+        line-height: 80px;
+        text-align: center;
+    }
+    #cover{
         
-          
-    </body>
-        <script type = "text/javascript" src = "index.js"></script>
+        width: 100%;
+        height: 300px;
+        line-height: 500px;
+        text-align: center;
+    }
+    #body_left {
+
+        width: 50%;
+        height: 500px;
+        float: left;
+        line-height: 500px;
+        text-align: center;
+    }
+
+    #timeLine {
+        position: relative;
+        width: 80;
+        height: 500px;
+        margin-left: 25%;
+        float: left;
+    }
+
+    #donut_from {
+        width: 400;
+        height: 500;
+        display: inline-block;
+    }
+
+    #legend_from {
+        position: absolute;;
+        width: 200;
+        height: 100;
+        left:33%; 
+        top:110%;
+       
+      
+    }
+
+    #body_right {
+        /* background-color:#4DD0E1; */
+        width: 50%;
+        height: 500px;
+        float: left;
+        text-align: center;
+    }
+
+    #desc {
+        position: absolute;
+        width: 380;
+        height: 35;
+        font-size: 18px;
+        font-family: '微軟正黑體';
+        font-weight:bold;
+        fill: black;
+        top: 40%; 
+       left: 20%;
+        /* display: inline-block; */
+    }
+    .desc {
+        position: relative;
+        font-size: 16px;
+        font-family: '微軟正黑體';
+        fill: #546E7A;
+        font-weight: border;
+        top:80%;
+    }
+    #desc_t{
+        margin-top:30%;
+        font-size: 20px;
+    
+    }
+    #desc_c , #desc_t{
+        width: 380;
+        height: 80;
+        display: inline-block;
+    }
+    #desc_t2 {
+        font-size: 20px;
+     
+    }
+    #Footer {
+
+        height: 80px;
+        /* background-color:#9CCC65; */
+    }
+
+    #donut_from,
+    #donut_work,
+    #donut_threek,
+    #donut_care {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin-top: 2%;
+        position: relative;
+    }
+
+    #donut_work,
+    #donut_threek,
+    #donut_care {
+        /* margin-left: 3%; */
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+    }
+
+    #donut_threek {
+        /* margin-left: 10%; */
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+    }
+
+    #desc1 {
+        position: absolute;
+        top: 10%;
+        left: 57%;
+        display: inline;
+    }
+
+    #text_from,
+    #text_ind {
+        position: absolute;
+        width: 80;
+        height: 20px;
+        top: 20%;
+        margin: auto;
+        display: inline-block;
+    }
+
+    #text_from {
+        left: 31%;
+        top:45%;
+        font-size: 20;
+        font-weight:bold;
+    }
+
+    #text_ind {
+        left: 37%;
+    }
+
+    #text_threek,
+    #text_care {
+        position: absolute;
+        width: 150;
+        height: 20px;
+        top: 50%;
+        margin: auto;
+        text-align: center;
+        font-size: 12;
+        display: inline-block;
+    }
+
+    #text_threek {
+        left: 57%;
+    }
+
+    #text_care {
+        left: 74%;
+    }
+
+    #linechart {
+        position: relative;
+        width: 400;
+        height: 300;
+        margin-top: 3%;
+        margin-left: 5%;
+        float: left;
+    }
+   
+</style>
+
+<body>
+    <div id="header">外籍移工</div>
+    <div id ="cover">
+        <div id="population"></div>
+      
+    </div>
+     <div id="body_left">
+
+        <div id="timeLine"> </div>
+        <div id="desc" >2017 年在台外籍移工達 663234 人</div>
+        <div id = "text_from" class = "desc">來自國家</div>
+        <div id="donut_from"></div>
+        <div id="legend_from"></div>
+        <div id = "donut_threek"></div>
+        <div id = "donut_care"></div>
+    </div>
+    <div id="body_right">
+       
+        <div id="desc_t" class="desc">不是每個外勞都叫瑪麗亞</div>
+        <div id="desc_c" class="desc">目前主要有來自「泰國」、「菲律賓」、「越南」、「印尼」的勞工，擔負起台灣重要的公共建設工作、成為社福體系中重要的人力資源。
+        </div>
+        <div id="desc_t2"  class="desc">外籍移工對台灣的意義: 搶飯碗的一群人??</div>
+        </div>
+     
+
+
+        <!-- <div id="body_right">
+            <div id="desc" class="desc">產業外勞社福外勞</div>
+            <div id="desc_c">1992 年，台灣通過〈就業服務法〉，開放國內產業合法聘僱外籍勞工。 目前主要有來自泰國、菲律賓、越南、印尼的勞工，擔負起台灣重要的公共建設工作、成為社福體系中重要的人力資源。
+            </div> -->
+
+
+           <!-- <div id = "desc1" class = "desc">外籍移工引進壓縮我國勞動市場需求?</div> -->
+        
+       
+        <!-- <div id = "text_ind" class = "desc">產業種類</div> -->
+        <!-- <div id = "text_threek" class = "desc">從事3K行業佔產業外勞比例<br>「骯髒、危險、辛苦」</div>
+        <div id = "text_care" class = "desc">從事看護工佔社福外勞比例<br>「憂鬱症高危險群」</div> -->
+        
+       
+        <!-- <div id = "donut_work"></div>
+       
+        <div  id = "linechart"></div>  -->
+
+
+
+
+
+
+
+
+
+</body>
+<script type="text/javascript" src="index.js"></script>
+
 </html>
