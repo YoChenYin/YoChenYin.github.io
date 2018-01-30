@@ -1,5 +1,5 @@
 
-d3.csv("data1.csv", function (error, dataset) {
+d3.csv("database/data1.csv", function (error, dataset) {
     if (error) throw error;
     /*population*/
 //append svg,g and set size
@@ -15,7 +15,6 @@ var pop = svg_pop.append('g');
 
     
 //year
-
 pop.selectAll('text')
     .data(dataset)
     .enter()
@@ -39,7 +38,6 @@ pop.selectAll('text')
         'font-weight': 'normal', 
     });
 //var Gradient = d3.scale.linear().domain([1,16]).range(['#00BCD4','#006064'])
-
 
 pop.append('line').attr({
     'x1':-10,
@@ -70,18 +68,16 @@ pop.append("text").text('台灣就業人數').attr('transform','translate(140,28
     'font-weight': 'normal', 
 });
 
-
 //bubble
-d3.csv("data.csv", function (error, dataset_ori) {
+d3.csv("database/data.csv", function (error, dataset_ori) {
     //convert numerical values from strings to numbers
     dataset_tw = dataset_ori.map(function(d){ d.value = +d.總計; return d; });
 
 var dataobj = {children:dataset_tw};
 var pack = d3.layout.pack().sort(null);//建立layout物件
-pack = pack.padding(2).size([1200,250]);//設立圖大小與泡泡距離
+    pack = pack.padding(2).size([1200,250]);//設立圖大小與泡泡距離
 var nodes = pack.nodes(dataobj);
-
-nodes = nodes.filter(function(it){return it.parent;});
+    nodes = nodes.filter(function(it){return it.parent;});
 var bubble = svg_pop.append('g');
 bubble.selectAll("circle")
     .data(nodes)
@@ -95,13 +91,12 @@ bubble.selectAll("circle")
                 return (80+(i-16)*75);
         },
         cy:function (d, i) {
-            console.log(d.growth_rate);
             if (i<16)
                 return ( 160-d.growth_rate * 7);
             else
                 return (145-d.growth_rate * 7);
         },
-        r:function(it,i){ console.log(it);if(i<16) return it.r*6 ;else return 2*it.r;},
+        r:function(it,i){ if(i<16) return it.r*6 ;else return 2*it.r;},
         fill:function (d, i) {
             if (i<16)
                 return '#EEA9A9';
@@ -123,7 +118,7 @@ bubble.selectAll("circle")
     }).attr('id',function(d,i){return 'circle'+i ;})
 
     bubble.selectAll('text').data(dataset_ori).enter().append('text').text(function(d,i){    
-        //console.log(i+' '+d.growth_rate);
+      
         if(i>15)
             return d.growth_rate;
     }).attr('x',function (d, i) {
@@ -146,7 +141,6 @@ bubble.selectAll("circle")
     bubble.selectAll('circle').on('mouseover',function(d,i){
         flag ++;
         if(i<16) {   
-            console.log(i);
             //(litter circle)
             d3.select(this).transition().duration(300).ease('poly',2).attr({
                 fill:'#8E354A',
@@ -179,7 +173,7 @@ bubble.selectAll("circle")
 })
 })
 
-d3.csv("donutdata.csv", function (error, dataset) {
+d3.csv("database/donutdata.csv", function (error, dataset) {
     
         if (error) throw error;
         var country = [],
@@ -205,9 +199,9 @@ d3.csv("donutdata.csv", function (error, dataset) {
             item3k_data[i] = item3k;
             itemcare_data[i] = itemcare;
         }
-    
+        console.log(country_data);
         var width = 400,
-            height = 500,
+            height = 250,
             cwidth = 25,
             offsetX = 20;
         var color = d3.scale.category20();
@@ -221,7 +215,7 @@ d3.csv("donutdata.csv", function (error, dataset) {
             .attr("width", width)
             .attr("height", height)
             .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+            .attr("transform", "translate(" + width / 2 + "," + height*4/7 + ")");
     
         var gs1 = svg1.selectAll("g").data(d3.values(country_data)).enter().append("g");
         var color1 = [ "#64363C",'#BEC23F',"#E8B647",  "#F596AA"];
@@ -231,17 +225,18 @@ d3.csv("donutdata.csv", function (error, dataset) {
             .attr("fill", function (d, i) { return color1[i]; })
             .attr("stroke", "#ffffff")
             .transition().duration(250)
-            .attr("d", function (d, i, j) { if (j == 15) return arc.innerRadius(50).outerRadius(80)(d) });
+            .attr("d", function (d, i, j) { if (j == 15) return arc.innerRadius(60).outerRadius(90)(d) });
     
     
         
-    
+        var width2 = 250;
+        var height2 = 200;
         var svg2 = d3.select("#donut_work").append("svg")
-            .attr("width", width)
-            .attr("height", height)
+            .attr("width", width2)
+            .attr("height", height2)
             .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-    
+            .attr("transform", "translate(" + width2 / 2 + "," + height2 / 2 + ")");
+       
     
         var gs2 = svg2.selectAll("g").data(d3.values(type_data)).enter().append("g");
     
@@ -250,42 +245,53 @@ d3.csv("donutdata.csv", function (error, dataset) {
             .enter().append("path")
             .attr("fill", function (d, i) { if (i < 2) return color1[i]; })
             .attr("stroke", "#ffffff")
-            .attr("d", function (d, i, j) { if (j == 15) return arc.innerRadius(40).outerRadius(70)(d) })
+            .attr("d", function (d, i, j) { if (j == 15) return arc.innerRadius(60).outerRadius(90)(d) })
     
         var svg3 = d3.select("#donut_threek").append("svg")
-            .attr("width", width)
-            .attr("height", height)
+            .attr("width", width2)
+            .attr("height", height2)
             .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-    
+            .attr("transform", "translate(" + width2 / 2 + "," + height2 / 2 + ")");
+        
+        
     
         var gs3 = svg3.selectAll("g").data(d3.values(item3k_data)).enter().append("g");
-        var color2 = ["#f44336", "#ffcdd2"];
+        var color2 = ["#64363C", "#D7C4BB"];
         var path3 = gs3.selectAll("path")
             .data(function (d) { return pie(d); })
             .enter().append("path")
             .attr("fill", function (d, i) { return color2[i]; })
-            .attr("d", function (d, i, j) { if (j == 15) return arc.innerRadius(40).outerRadius(70)(d) })
-    
+            .attr("d", function (d, i, j) { if (j == 15) return arc.innerRadius(60).outerRadius(90)(d) })
+            svg3.append("text").text("產業外勞從事3k行業人數")
+                .attr("transform", "translate(-90,0)")
+                .attr({
+                    "font-size": "16px",
+                    "font-weight": "bold"
+                });       
         var svg4 = d3.select("#donut_care").append("svg")
-            .attr("width", width)
-            .attr("height", height)
+            .attr("width", width2)
+            .attr("height", height2)
             .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+            .attr("transform", "translate(" + width2 / 2 + "," + height2 / 2 + ")");
     
     
         var gs4 = svg4.selectAll("g").data(d3.values(itemcare_data)).enter().append("g");
-        var color3 = ["#1A237E", "#C5CAE9"];
+        var color3 = ["#E8B647", "#DAC9A6"];
         var path4 = gs4.selectAll("path")
             .data(function (d) { return pie(d); })
             .enter().append("path")
             .attr("fill", function (d, i) { return color3[i]; })
-            .attr("d", function (d, i, j) { if (j == 15) return arc.innerRadius(40).outerRadius(70)(d) })
-    
+            .attr("d", function (d, i, j) { if (j == 15) return arc.innerRadius(60).outerRadius(90)(d) })
+            svg4.append("text").text("社福外勞從事看護工人數")
+            .attr("transform", "translate(-90,0)")
+            .attr({
+                "font-size": "16px",
+                "font-weight": "bold"
+            });       
         /*圖例*/
-        var width_legend = 200,
-            height_legend = 80;
-        var legend_from = d3.select("#legend_from").append("svg").attr("width", width_legend).attr("height", height_legend);
+        var width_legend = 300,
+            height_legend = 90;
+        var legend_from = d3.select("#donut_from").append("svg").attr("width", width_legend).attr("height", height_legend);
         var g_legend = legend_from.append("g");
         var text_from = ["印尼", "菲律賓", "泰國", "越南"];
         var text_ind = ["產業外勞", "社福外勞"];
@@ -303,9 +309,9 @@ d3.csv("donutdata.csv", function (error, dataset) {
             })
             .attr("transform", function (d, i) {
                 if (i < 4)
-                    return "translate(0," + (5 + 18 * i) + ")";
+                    return "translate(0," + (5 + 20 * i) + ")";
                 else if (i < 6)
-                    return "translate(220," + (5 + 18 * (i - 4)) + ")";
+                    return "translate(220," + (5 + 20 * (i - 4)) + ")";
             })
             .attr('visibility', function (d, i) { if (i > 3) return 'hidden'; });
         g_legend.selectAll("g")
@@ -332,7 +338,7 @@ d3.csv("donutdata.csv", function (error, dataset) {
     
         /*LineChart*/
         //append svg ,g and set position
-        d3.csv("Linedata.csv", function (csvdata) {
+        d3.csv("database/Linedata.csv", function (csvdata) {
             if (error) throw error;
             var width_Line = 400, height_Line = 300;
             var padding = { top: 30, right: 50, bottom: 50, left: 50 };
@@ -479,7 +485,7 @@ d3.csv("donutdata.csv", function (error, dataset) {
                 .attr({
                     'x': 30,
                     'y': function (d, i) {
-                        return (50 + (i + 1) * 25)
+                        return (20 + (i + 1) * 30)
                     },
                     'fill': "gray",
                     'font-size': '12px',
@@ -508,30 +514,34 @@ d3.csv("donutdata.csv", function (error, dataset) {
             //逐年變動
             TimeLine.selectAll('text')
                 .on('mouseover', function (d, i) {
-                    console.log("i", i);
                     //total text
-                    $("#desc").text(d.年分 + "在台外籍移工達" + d.總計 + "人");
+                   
+                    if(Number(d.總計) < Number(d.原住民)){
+                        $("#desc").text(d.年分 + "在台外籍移工達 "+ d.總計 +" 人");
+
+                    }else{
+                        $("#desc").html(d.年分 + "在台外籍移工達 " + d.總計 +" 人</br>"+"已超越原住民人數 "+d.原住民);
+                    }   
                     //bigger circle
                     d3.select(this).attr({
                         'font-size': "20px"
                     });
-                    path1 = gs1.selectAll("path")
+                    svg1.selectAll("g").selectAll("path")
                         .transition().duration(20000).ease('poly', '3')
-                        .attr("d", function (d, i1, j) { if (j == i) return arc.innerRadius(50).outerRadius(85)(d); });
-                    path2 = gs2.selectAll("path")
+                        .attr("d", function (d, i1, j) { if (j == i) {return arc.innerRadius(60).outerRadius(90)(d);} });
+                    gs2.selectAll("path")
                         .transition().duration(20000).ease('poly', '3')
                         .attr("fill", function (d, i) { return color1[i]; })
-                        .attr("d", function (d, i1, j) { if (j == i) return arc.innerRadius(50).outerRadius(80)(d); });
-                    path3 = gs3.selectAll("path")
-                        .transition().duration(20000).ease('poly', '3')
-                        .attr("fill", function (d, i) { return color(i); })
-                        .attr("d", function (d, i1, j) { if (j == i) return arc.innerRadius(50).outerRadius(80)(d); });
-                    path4 = gs4.selectAll("path")
-                        .transition().duration(20000).ease('poly', '3')
-                        .attr("fill", function (d, i) { return color(i); })
-                        .attr("d", function (d, i1, j) { if (j == i) return arc.innerRadius(50).outerRadius(80)(d); });
-    
-    
+                        .attr("d", function (d, i1, j) { if (j == i) return arc.innerRadius(60).outerRadius(90)(d); });
+                    gs3.selectAll("path")
+                        .transition().ease('poly', '2')
+                        .attr("fill", function (d, i) { return color2[i]; })
+                        .attr("d", function (d, i1, j) { if (j == i) return arc.innerRadius(60).outerRadius(90)(d); });
+                    gs4.selectAll("path")
+                        .transition().ease('poly', '2')
+                        .attr("fill", function (d, i) { return color3[i]; })
+                        .attr("d", function (d, i1, j) { if (j == i) return arc.innerRadius(60).outerRadius(90)(d); });
+                   
     
     
                 })
@@ -539,48 +549,53 @@ d3.csv("donutdata.csv", function (error, dataset) {
                     d3.select(this).attr({
                         'font-size': "12px"
                     });
-                    gs1.selectAll("path").on("mouseover", function (d, i, j) {
-                        d3.select(this).attr("d", function (d, i, j1) { return arc.innerRadius(50).outerRadius(80)(d); })
-                    }).on("mouseout", function (d, i, j) {
-                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(50).outerRadius(70)(d); })
+                    svg1.selectAll("g").selectAll("path").on("mouseover", function (d, i, j) {
+                        d3.selectAll("path").attr("opacity",0.7);
+                        d3.select(this).attr("opacity",1).attr("d", function (d) {return arc.innerRadius(60).outerRadius(95)(d); })
+
+                    }).on("mouseout", function (d, i1, j1) {
+                        d3.selectAll("path").attr("opacity",1);
+                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(90)(d); })
                     });
                     gs2.selectAll("path").on("mouseover", function (d, i, j) {
-                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(50).outerRadius(70)(d); })
+                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(95)(d); })
                     }).on("mouseout", function (d, i, j) {
-                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(50).outerRadius(70)(d); })
+                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(90)(d); })
                     });
                     gs3.selectAll("path").on("mouseover", function (d, i, j) {
-                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(50).outerRadius(85)(d); })
+                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(95)(d); })
                     }).on("mouseout", function (d, i, j) {
-                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(50).outerRadius(85)(d); })
+                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(90)(d); })
                     });
                     gs4.selectAll("path").on("mouseover", function (d, i, j) {
-                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(50).outerRadius(85)(d); })
+                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(95)(d); })
                     }).on("mouseout", function (d, i, j) {
-                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(50).outerRadius(85)(d); })
+                        d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(90)(d); })
                     });
     
                 });
-            gs1.selectAll("path").on("mouseover", function (d, i, j) {
-                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(50).outerRadius(85)(d); })
+            svg1.selectAll("path").on("mouseover", function (d, i, j) {
+                d3.selectAll("path").attr("opacity",0.7);
+                d3.select(this).attr("opacity",1).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(95)(d); })
             }).on("mouseout", function (d, i, j) {
-                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(50).outerRadius(80)(d); })
-            })
+                d3.selectAll("path").attr("opacity",1);
+                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(90)(d); })
+            });
             gs2.selectAll("path").on("mouseover", function (d, i, j) {
-                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(40).outerRadius(75)(d); })
+                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(95)(d); })
             }).on("mouseout", function (d, i, j) {
-                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(40).outerRadius(70)(d); })
-            })
+                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(90)(d); })
+            });
             gs3.selectAll("path").on("mouseover", function (d, i, j) {
-                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(40).outerRadius(75)(d); })
+                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(95)(d); })
             }).on("mouseout", function (d, i, j) {
-                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(40).outerRadius(70)(d); })
-            })
+                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(90)(d); })
+            });
             gs4.selectAll("path").on("mouseover", function (d, i, j) {
-                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(40).outerRadius(75)(d); })
+                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(95)(d); })
             }).on("mouseout", function (d, i, j) {
-                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(40).outerRadius(70)(d); })
-            })
+                d3.select(this).attr("d", function (d, i, j) { return arc.innerRadius(60).outerRadius(90)(d); })
+            });
     
         });
    

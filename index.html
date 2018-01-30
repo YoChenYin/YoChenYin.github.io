@@ -17,7 +17,7 @@
        
         height: 80px;
         font-size: 28px;
-        font-family: 微軟正黑體;
+        font-family: '"Helvetica Neue", Helvetica, Arial, sans-serif';
         font-weight: bold;
         line-height: 80px;
         text-align: center;
@@ -30,11 +30,10 @@
         text-align: center;
     }
     #body_left {
-
         width: 50%;
-        height: 500px;
+        height: 900px;
         float: left;
-        line-height: 500px;
+        /* line-height: 500px; */
         text-align: center;
     }
 
@@ -47,60 +46,54 @@
     }
 
     #donut_from {
-        width: 400;
-        height: 500;
-        display: inline-block;
+        position: relative;
+        margin-left: 40%;
+        width: 400px;
+        height: 380px;
+        
     }
 
-    #legend_from {
-        position: absolute;;
-        width: 200;
-        height: 100;
-        left:33%; 
-        top:110%;
-       
-      
-    }
 
     #body_right {
         /* background-color:#4DD0E1; */
         width: 50%;
-        height: 500px;
+        height: 900px;
         float: left;
         text-align: center;
     }
 
     #desc {
-        position: absolute;
+        position: relative;
         width: 380;
-        height: 35;
-        font-size: 18px;
-        font-family: '微軟正黑體';
+        height: 80;
+        font-size: 20px;
+        font-family: '"Helvetica Neue", Helvetica, Arial, sans-serif';
         font-weight:bold;
-        fill: black;
-        top: 40%; 
-       left: 20%;
-        /* display: inline-block; */
+        fill: black; 
+        margin-top: 5%;
+        margin-left: 40%; 
     }
     .desc {
         position: relative;
         font-size: 16px;
-        font-family: '微軟正黑體';
+        font-family: '"Helvetica Neue", Helvetica, Arial, sans-serif';
         fill: #546E7A;
         font-weight: border;
-        top:80%;
+       
     }
-    #desc_t{
-        margin-top:30%;
-        font-size: 20px;
     
-    }
-    #desc_c , #desc_t{
-        width: 380;
+    #desc_c{
+        width: 200;
         height: 80;
-        display: inline-block;
+        left: 25%;
+        top:30%;
     }
     #desc_t2 {
+        width:400px;
+        height: 40px;
+        margin-left: 10%;
+        margin-top: 5%;
+        font-weight:bolder;
         font-size: 20px;
      
     }
@@ -110,52 +103,43 @@
         /* background-color:#9CCC65; */
     }
 
-    #donut_from,
-    #donut_work,
-    #donut_threek,
-    #donut_care {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        margin-top: 2%;
-        position: relative;
-    }
-
-    #donut_work,
-    #donut_threek,
-    #donut_care {
-        /* margin-left: 3%; */
-        width: 200px;
-        height: 200px;
-        display: inline-block;
-    }
 
     #donut_threek {
-        /* margin-left: 10%; */
-        width: 200px;
+        position: relative;
+        width: 250px;
         height: 200px;
+        margin-top: 12%;
         display: inline-block;
     }
-
+    #donut_care {
+        position: relative;
+        width:250px;
+        height:200px;
+        margin-left: 5%;
+        display: inline-block;
+    }
     #desc1 {
-        position: absolute;
-        top: 10%;
-        left: 57%;
-        display: inline;
+        position: relative;
+        font-size: 16px;
+        font-weight: bolder;
+        margin-top: 2%;
+        
     }
 
     #text_from,
     #text_ind {
-        position: absolute;
-        width: 80;
-        height: 20px;
+        position: relative;;
+        width: 250;
+        height: 50px;
         top: 20%;
         margin: auto;
         display: inline-block;
     }
 
     #text_from {
-        left: 31%;
-        top:45%;
-        font-size: 20;
+        
+        top:50%;
+        font-size: 18;
         font-weight:bold;
     }
 
@@ -203,30 +187,32 @@
      <div id="body_left">
 
         <div id="timeLine"> </div>
-        <div id="desc" >2017 年在台外籍移工達 663234 人</div>
-        <div id = "text_from" class = "desc">來自國家</div>
-        <div id="donut_from"></div>
-        <div id="legend_from"></div>
-        <div id = "donut_threek"></div>
-        <div id = "donut_care"></div>
+        <div id="desc" >2017 年在台外籍移工達 663234 人<br>已超越原住民人數 559426</div>
+        <div id = "text_from" class = "desc">外籍移工都來自哪裡呢?<br>不是每個外勞都叫瑪麗亞</div>
+        <div id="donut_from"></div>  
+        
+        <!--<div id="desc_c" class="desc">目前主要有來自「泰國」、「菲律賓」、「越南」、「印尼」的勞工，擔負起台灣重要的公共建設工作、成為社福體系中重要的人力資源。
+        </div> -->
+       
+        
+        
     </div>
     <div id="body_right">
-       
-        <div id="desc_t" class="desc">不是每個外勞都叫瑪麗亞</div>
-        <div id="desc_c" class="desc">目前主要有來自「泰國」、「菲律賓」、「越南」、「印尼」的勞工，擔負起台灣重要的公共建設工作、成為社福體系中重要的人力資源。
-        </div>
         <div id="desc_t2"  class="desc">外籍移工對台灣的意義: 搶飯碗的一群人??</div>
+        <div id = "desc1" class = "desc">移工在台多從事3K行業「骯髒、危險、辛苦」大多台人不願從事之工作<br>與社福體系中屬「憂鬱症高危險群」的看護工</div>
+        <div id = "donut_threek"></div>
+        <div id = "donut_care"></div>
+        
         </div>
      
 
 
         <!-- <div id="body_right">
-            <div id="desc" class="desc">產業外勞社福外勞</div>
             <div id="desc_c">1992 年，台灣通過〈就業服務法〉，開放國內產業合法聘僱外籍勞工。 目前主要有來自泰國、菲律賓、越南、印尼的勞工，擔負起台灣重要的公共建設工作、成為社福體系中重要的人力資源。
             </div> -->
 
 
-           <!-- <div id = "desc1" class = "desc">外籍移工引進壓縮我國勞動市場需求?</div> -->
+           
         
        
         <!-- <div id = "text_ind" class = "desc">產業種類</div> -->
