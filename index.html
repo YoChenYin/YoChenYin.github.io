@@ -10,23 +10,48 @@
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+    
 
 </head>
+<style>
+    @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+      .axis {
+        font: 12px sans-serif;
+      }
+      
+      p {
+        font: 12px 'Noto Sans TC', sans-serif;
+        margin: 0 0 2px 0;
+        padding: 0;
+      }
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: #373C38;
+        /* shape-rendering:crispEdges; */
+      }
+      
+      .brush .extent {
+        stroke: #fff;
+        fill-opacity: .125;
+        shape-rendering: crispEdges;
+      }
+    </style>
 <style>
     #header {
        
         height: 80px;
-        font-size: 28px;
-        font-family: '"Helvetica Neue", Helvetica, Arial, sans-serif';
-        font-weight: bold;
+        font-size: 30px;
+        font-family: 'Noto Sans TC', sans-serif;
+        font-weight: 600;
         line-height: 80px;
         text-align: center;
     }
-    #cover{
-        
-        width: 100%;
-        height: 300px;
+    #cover{  
+        width: 80%;
+        height: 550px;
         line-height: 500px;
+        margin-left:10%;
         text-align: center;
     }
     #body_left {
@@ -61,13 +86,24 @@
         float: left;
         text-align: center;
     }
-
+    
+    #desc2 {
+        position: relative;
+        width: 380;
+        height: 80;
+        font-size: 20px;
+        font-family: 'Noto Sans TC', sans-serif;
+        font-weight:bold;
+        fill:black;
+        margin-top: 2%;
+        margin-left: 18%; 
+    }
     #desc {
         position: relative;
         width: 380;
         height: 80;
         font-size: 20px;
-        font-family: '"Helvetica Neue", Helvetica, Arial, sans-serif';
+        font-family: 'Noto Sans TC', sans-serif;
         font-weight:bold;
         fill: black; 
         margin-top: 5%;
@@ -76,23 +112,20 @@
     .desc {
         position: relative;
         font-size: 16px;
-        font-family: '"Helvetica Neue", Helvetica, Arial, sans-serif';
+        font-family: 'Noto Sans TC', sans-serif;
         fill: #546E7A;
         font-weight: border;
        
     }
-    
-    #desc_c{
-        width: 200;
-        height: 80;
-        left: 25%;
-        top:30%;
+    #topic{
+        margin-left:28%;
     }
     #desc_t2 {
         width:400px;
-        height: 40px;
+        height: 50px;
         margin-left: 10%;
         margin-top: 5%;
+        margin-bottom: 6%;
         font-weight:bolder;
         font-size: 20px;
      
@@ -108,7 +141,7 @@
         position: relative;
         width: 250px;
         height: 200px;
-        margin-top: 12%;
+        margin-top: 7%;
         display: inline-block;
     }
     #donut_care {
@@ -126,46 +159,6 @@
         
     }
 
-    #text_from,
-    #text_ind {
-        position: relative;;
-        width: 250;
-        height: 50px;
-        top: 20%;
-        margin: auto;
-        display: inline-block;
-    }
-
-    #text_from {
-        
-        top:50%;
-        font-size: 18;
-        font-weight:bold;
-    }
-
-    #text_ind {
-        left: 37%;
-    }
-
-    #text_threek,
-    #text_care {
-        position: absolute;
-        width: 150;
-        height: 20px;
-        top: 50%;
-        margin: auto;
-        text-align: center;
-        font-size: 12;
-        display: inline-block;
-    }
-
-    #text_threek {
-        left: 57%;
-    }
-
-    #text_care {
-        left: 74%;
-    }
 
     #linechart {
         position: relative;
@@ -179,7 +172,9 @@
 </style>
 
 <body>
-    <div id="header">外籍移工</div>
+    <div id="header">在 台 灣 的 外 籍 移 工</div>
+    <div id="topic" class=desc>自開放外籍移工後，街頭上越來越多的東南亞臉孔，形塑台灣多元社會的另一種風貌</div>
+    <div id="desc2" class=desc>在台移工與台灣就業市場關係</div>
     <div id ="cover">
         <div id="population"></div>
       
@@ -188,13 +183,10 @@
 
         <div id="timeLine"> </div>
         <div id="desc" >2017 年在台外籍移工達 663234 人<br>已超越原住民人數 559426</div>
-        <div id = "text_from" class = "desc">外籍移工都來自哪裡呢?<br>不是每個外勞都叫瑪麗亞</div>
+        <div id = "desc1" class = "desc">外籍移工都來自哪裡呢?<br>不是每個外勞都叫瑪麗亞</div>
         <div id="donut_from"></div>  
         
-        <!--<div id="desc_c" class="desc">目前主要有來自「泰國」、「菲律賓」、「越南」、「印尼」的勞工，擔負起台灣重要的公共建設工作、成為社福體系中重要的人力資源。
-        </div> -->
        
-        
         
     </div>
     <div id="body_right">
@@ -204,32 +196,11 @@
         <div id = "donut_care"></div>
         
         </div>
-     
-
-
-        <!-- <div id="body_right">
-            <div id="desc_c">1992 年，台灣通過〈就業服務法〉，開放國內產業合法聘僱外籍勞工。 目前主要有來自泰國、菲律賓、越南、印尼的勞工，擔負起台灣重要的公共建設工作、成為社福體系中重要的人力資源。
-            </div> -->
-
-
-           
-        
        
-        <!-- <div id = "text_ind" class = "desc">產業種類</div> -->
-        <!-- <div id = "text_threek" class = "desc">從事3K行業佔產業外勞比例<br>「骯髒、危險、辛苦」</div>
-        <div id = "text_care" class = "desc">從事看護工佔社福外勞比例<br>「憂鬱症高危險群」</div> -->
-        
-       
-        <!-- <div id = "donut_work"></div>
-       
+       <!-- 產業外勞與社福外勞比例圖
+           <div id = "donut_work"></div>-->
+       <!--台勞與外勞職業災害率比較
         <div  id = "linechart"></div>  -->
-
-
-
-
-
-
-
 
 
 </body>
