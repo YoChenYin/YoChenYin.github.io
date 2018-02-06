@@ -381,7 +381,7 @@
              .attr("transform", "translate(" + width / 2 + "," + height * 4 / 7 + ")");
 
          var gs1 = svg1.selectAll("g").data(d3.values(country_data)).enter().append("g");
-         var color1 = ["#64363C", '#BEC23F', "#E8B647", "#F596AA"];
+         var color1 = ["#64363C", '#BEC23F', "#FFB11B", "#F596AA"];
          var path1 = gs1.selectAll("path")
              .data(function (d) {
                  return pie(d);
@@ -533,8 +533,8 @@
          //append svg ,g and set position
          d3.csv("database/Linedata.csv", function (csvdata) {
              if (error) throw error;
-             var width_Line = 400,
-                 height_Line = 300;
+             var width_Line = 650,
+                 height_Line = 350;
              var padding = {
                  top: 30,
                  right: 50,
@@ -563,7 +563,7 @@
 
              //創建x,y軸
              var xAxis = d3.svg.axis().scale(xScale).orient('bottom');
-             var yAxis = d3.svg.axis().scale(yScale).orient('left');
+             var yAxis = d3.svg.axis().scale(yScale).tickFormat(function(d){return d+'%';}).orient('left');
 
              //call axis
              LineChart.append('g').attr('class', 'axis').attr('transform', 'translate(0,' + (height_Line - padding.top - padding.bottom) + ')')
@@ -574,8 +574,9 @@
                  })
                  .selectAll('text')
                  .attr({
-                     'fill': 'transparent',
+                     'fill': 'black',
                      'stroke': 'none',
+                     'font-weight':500,
                      'font-family': 'monospace'
                  });
              LineChart.append('g').attr('class', 'axis').call(yAxis)
@@ -588,8 +589,11 @@
                  .attr({
                      'fill': 'black',
                      'stroke': 'none',
+                     'font-weight':500,
                      'font-family': 'monospace'
                  });
+                
+                
              //折線(產業移工&社福移工)
              var Line = [];
              Line[0] = d3.svg.line().x(function (d) {
@@ -599,7 +603,7 @@
              }).interpolate('linear');
              LineChart.append('path').attr('class', 'line').attr('d', Line[0](csvdata))
                  .attr({
-                     'stroke': '#CDDC39',
+                     'stroke': '#E8B647',
                      'stroke-width': '1px',
                      'fill': 'none'
                  });
@@ -610,7 +614,7 @@
              }).interpolate('linear');
              LineChart.append('path').attr('class', 'line').attr('d', Line[1](csvdata))
                  .attr({
-                     'stroke': '#d50000',
+                     'stroke': '#26453D',
                      'stroke-width': '1px',
                      'fill': 'none'
                  });
@@ -629,7 +633,7 @@
                      return yScale(d.國內);
                  })
                  .attr('r', 3)
-                 .attr('fill', '#CDDC39')
+                 .attr('fill', '#E8B647')
                  .attr('opacity', function (d, i) {
                      return 1;
                      // if(i!=0)
@@ -649,7 +653,7 @@
                      return yScale(d.外勞);
                  })
                  .attr('r', 3)
-                 .attr('fill', '#d50000')
+                 .attr('fill', '#26453D')
                  .attr('opacity', function (d, i) {
                      return 1;
                      // if(i!=0)
@@ -658,8 +662,19 @@
                  .attr('id', function (d, i) {
                      return 'dot' + i;
                  });
-
-             //標記文字
+                 LineChart.append("text").text('台灣勞工職災率').attr('transform', 'translate(25,255)').call(textstyle1);
+                 LineChart.append("text").text('外籍勞工職災率').attr('transform', 'translate(150,255)').call(textstyle1);
+                 LineChart.append('circle').attr({
+                    'transform': 'translate(15,250)',
+                    'r': 5,
+                    'fill': '#E8B647',
+                })
+                LineChart.append('circle').attr({
+                    'transform': 'translate(140,250)',
+                    'r': 5,
+                    'fill': '#26453D',
+                })
+                 //標記文字
              var offsetY = 1;
              LineChart.append('g').attr('class', 'mark1');
              LineChart.append('g').attr('class', 'mark2');
@@ -731,7 +746,7 @@
              TimeLine.selectAll('text')
                  .on('mouseover', function (d, i) {
                      //total text
-
+                     
                      if (Number(d.總計) < Number(d.原住民)) {
                          $("#desc").text(d.年分 + "在台外籍移工達 " + d.總計 + " 人");
 
