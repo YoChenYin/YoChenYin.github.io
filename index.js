@@ -66,7 +66,7 @@
              .enter().append("circle")
              .attr('class', 'dot')
              .attr("r", function (d) {
-                 return d.移工總計 / 120000;
+                 return d.移工總計 / 25000;
              })
              .attr("cx", function (d) {
                  return x(d.年分);
@@ -224,13 +224,17 @@
              }
              if (last != i) {
                  d3.select('#dots' + last).transition().duration(300).ease('poly', 2).attr({
-                     fill: function (d) {
+                    r: function (d) {
+                        return d.移工總計 / 25000;
+                    }, 
+                    fill: function (d) {
                          return Gradient(d.移工總計);
                      },
                      opacity: 1
                  });
                  d3.select('#dots_b' + last).transition().duration(300).ease('poly', 2).attr({
-                     fill: function (d) {
+                    
+                      fill: function (d) {
                          return Gradient(d.移工總計);
                      },
                      opacity: 1
@@ -249,7 +253,10 @@
              }
              //(litter circle)
              d3.select(this).transition().duration(300).ease('poly', 2).attr({
-                 fill: '#8E354A',
+                r: function (d) {
+                    return d.移工總計 / 120000;
+                },
+                 
                  opacity: 1
              })
              d3.select('#dots_b' + i).transition().duration(300).ease('poly', 2).attr({
@@ -325,7 +332,7 @@
              'fill': "#6E552F",
              'font-size': '16px',
              'font-weight': 'border',
-             'font-family': 'monospace'
+             'font-family': "'Inconsolata', monospace"
          });
      }
 
@@ -577,7 +584,7 @@
                      'fill': 'black',
                      'stroke': 'none',
                      'font-weight':500,
-                     'font-family': 'monospace'
+                     'font-family': "'Inconsolata', monospace"
                  });
              LineChart.append('g').attr('class', 'axis').call(yAxis)
                  .attr({
@@ -590,7 +597,7 @@
                      'fill': 'black',
                      'stroke': 'none',
                      'font-weight':500,
-                     'font-family': 'monospace'
+                     'font-family': "'Inconsolata', monospace"
                  });
                 
                 
@@ -690,7 +697,7 @@
                          'fill': "black",
                          'font-size': '12px',
                          'font-weight': 'bold',
-                         'font-family': 'monospace',
+                         'font-family': "'Inconsolata', monospace",
                          'visibility': 'hidden',
                          'id': function (d, i) {
                              return 'mark' + i;
@@ -739,7 +746,7 @@
                      'fill': "gray",
                      'font-size': '12px',
                      'font-weight': 'bold',
-                     'font-family': 'monospace'
+                     'font-family': "'Inconsolata', monospace"
                  });
 
              //逐年變動

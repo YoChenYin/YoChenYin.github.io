@@ -10,7 +10,7 @@
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
-    
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> 
 
 </head>
 <style>
@@ -98,13 +98,22 @@
         margin-top: 2%;
         margin-left: 18%; 
     }
+    #desc1 {
+        position: relative;
+        font-size: 16px;
+        font-weight: normal;
+        margin-top: 2%;
+        
+        
+        
+    }
     #desc {
         position: relative;
         width: 380;
-        height: 80;
-        font-size: 20px;
+        height: 50;
+        font-size: 16px;
         font-family: 'Noto Sans TC', sans-serif;
-        font-weight:bold;
+        font-weight:normal;
         fill: black; 
         margin-top: 5%;
         margin-left: 40%; 
@@ -121,10 +130,20 @@
         margin-left:28%;
     }
     #desc_t2 {
-        width:400px;
+        width:420px;
         height: 50px;
         margin-left: 10%;
         margin-top: 5%;
+        margin-bottom: 6%;
+        font-weight:bolder;
+        font-size: 20px;
+     
+    }
+    #desc_t2f {
+        width:400px;
+        height: 50px;
+        margin-top: 5%;
+        margin-left: 40%;
         margin-bottom: 6%;
         font-weight:bolder;
         font-size: 20px;
@@ -135,7 +154,10 @@
         height: 80px;
         /* background-color:#9CCC65; */
     }
-
+    .highlight{
+        background: linear-gradient(transparent 40%,rgba(255,255,255,0) 40%, #FFF176 90%,transparent 95%);	
+        padding: 2px 1px;
+    }
 
     #donut_threek {
         position: relative;
@@ -151,13 +173,7 @@
         margin-left: 5%;
         display: inline-block;
     }
-    #desc1 {
-        position: relative;
-        font-size: 16px;
-        font-weight: bolder;
-        margin-top: 2%;
-        
-    }
+    
     #desc3{
         position: relative;
         font-size: 16px;
@@ -178,9 +194,9 @@
 </style>
 
 <body>
-    <div id="header">在 台 灣 的 外 籍 移 工</div>
+    <div id="header"> 移 工 的 台 灣 夢</div>
     <div id="topic" class=desc>自開放外籍移工後，街頭上越來越多的東南亞臉孔，形塑台灣多元社會的另一種風貌</div>
-    <div id="desc2" class=desc>在台移工與台灣就業市場關係</div>
+    <div id="desc2" class=desc>【 移工與台灣就業市場關係 】</div>
     <div id ="cover">
         <div id="population"></div>
       
@@ -188,19 +204,22 @@
      <div id="body_left">
 
         <div id="timeLine"> </div>
-        <div id="desc" >2017 年在台外籍移工達 663234 人<br>已超越原住民人數 559426</div>
-        <div id = "desc1" class = "desc">外籍移工都來自哪裡呢?<br>不是每個外勞都叫瑪麗亞</div>
+        <div id = "desc_t2f" class = "desc">【 外籍移工都來自哪裡呢? 】<br>不是每個外勞都叫瑪麗亞</div>
+        <div id="desc" > 2017 年在台外籍移工達 663234 人<br>已超越原住民人數 559426</div>
+        
         <div id="donut_from"></div> 
         <!--台勞與外勞職業災害率比較 -->
+        <div id="desc2" class=desc>【 台灣夢，到底是美夢還是惡夢? 】</div>
         <div  id = "linechart"></div> 
        
         
     </div>
     <div id="body_right">
-        <div id="desc_t2"  class="desc">外籍移工對台灣的意義: 搶飯碗的一群人??</div>
-        <div id = "desc1" class = "desc">移工在台多從事3K行業「骯髒、危險、辛苦」大多台人不願從事之工作<br>與社福體系中屬「憂鬱症高危險群」的看護工</div>
+        <div id="desc_t2"  class="desc">【 外籍移工對台灣的意義: 搶飯碗的一群人??】</div>
+        <div id = "desc1" class = "desc">移工在台多從事<mark class="highlight">3K行業「骯髒、危險、辛苦」</mark>大多台人不願從事之工作<br>與社福體系中屬<mark class="highlight">「憂鬱症高危險群」的看護工</mark></div>
         <div id = "donut_threek"></div>
         <div id = "donut_care"></div>
+        
         <div id='desc3'>移工來台，對台灣產業、社福從原本的補充性勞力<br>到今日的替代性勞力，成為台灣社會不可或缺的族群<br>
         對於移工，我們是否提供了一個友善的工作環境?<br>抑或只是歧異的眼光<br>看待這些承擔台人不願從事之低階但必須的工作、<br>代替缺席的家人照顧幼兒長者的移工朋友呢?</div>
         </div>
