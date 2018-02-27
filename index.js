@@ -519,6 +519,9 @@
                  else if (i < 6)
                      return "translate(220," + (5 + 20 * (i - 4)) + ")";
              })
+             .attr('id',function(d,i){
+                 return 'legend'+i;
+             })
              .attr('visibility', function (d, i) {
                  if (i > 3) return 'hidden';
              });
@@ -540,6 +543,9 @@
                  else if (i < 6)
                      return "translate(250," + (14 + 18 * (i - 4)) + ")";
              })
+             .attr('id',function(d,i){
+                return 'legend'+i;
+            })
              .attr({
                  "font-size": "1vw",
                  "font-weight": "bold"
@@ -758,7 +764,7 @@
                      'font-family': "'Inconsolata', monospace"
                  });
             var religion = [];
-            religion.push("伊斯蘭教","天主教","佛教","佛教");
+            religion.push("印尼<br>伊斯蘭教<br>可能每日要求祈禱數次<br>不吃豬肉、齋戒月白天禁水禁食","菲律賓<br>天主教<br>星期日可能要求去教堂","泰國<br>佛教","越南<br>佛教");
              //逐年變動
              TimeLine.selectAll('text')
                  .on('mouseover', function (d, i) {
@@ -812,6 +818,10 @@
                          d3.select(this).attr("opacity", 1).attr("d", function (d) {
                              return arc.innerRadius(60).outerRadius(95)(d);
                          })
+                         g_legend.selectAll('rect').attr("opacity", 0.7);
+                         g_legend.selectAll('text').attr("opacity", 0.7);
+                         g_legend.selectAll('#legend'+i).attr("opacity", 1);
+                         g_legend.selectAll('#legend'+i).attr("opacity", 1);
 
                      }).on("mouseout", function (d, i1, j1) {
                          d3.selectAll("path").attr("opacity", 1);
@@ -849,6 +859,11 @@
 
                  });
              svg1.selectAll("path").on("mouseover", function (d, i, j) {
+                $("#religion").html(religion[i]);
+                g_legend.selectAll('rect').attr("opacity", 0.7);
+                g_legend.selectAll('text').attr("opacity", 0.7);
+                g_legend.selectAll('#legend'+i).attr("opacity", 1);
+                g_legend.selectAll('#legend'+i).attr("opacity", 1);
                  d3.selectAll("path").attr("opacity", 0.7);
                  d3.select(this).attr("opacity", 1).attr("d", function (d, i, j) {
                      return arc.innerRadius(60).outerRadius(95)(d);
@@ -895,7 +910,7 @@
         $(window).scroll(function() {
             var scrollVal = $(this).scrollTop();
             console.log(scrollVal);
-            if (scrollVal > 1320 && scrollVal<2000) {
+            if ((scrollVal > 1780 && scrollVal<2000)||(scrollVal > 2290 && scrollVal<2500)) {
                 $('#timeLine').css('visibility', 'visible');
             } else {
                 $('#timeLine').css('visibility', 'hidden');
