@@ -223,6 +223,14 @@
                  flag = 1;
              }
              if (last != i) {
+                 //total text
+                 $("#year").text(d.年分);
+                 $("#total").text(d.移工總計);    
+                 if (Number(d.移工總計) < Number(d.原住民)) {
+                    $("#aboriginal").text(" ");
+                } else {
+                    $("#aboriginal").html("已超越原住民人數 " + d.原住民);
+                }
                  d3.select('#dots' + last).transition().duration(300).ease('poly', 2).attr({
                     r: function (d) {
                         return d.移工總計 / 25000;
@@ -321,7 +329,7 @@
      function textstyle1(t) {
          t.attr({
              'fill': "#373C38",
-             'font-size': '14px',
+             'font-size': '1vw',
              'font-weight': '500',
              'font-family': "'Noto Sans TC', sans-serif"
          });
@@ -330,7 +338,7 @@
      function textstyle(t) {
          t.attr({
              'fill': "#6E552F",
-             'font-size': '16px',
+             'font-size': '1vw',
              'font-weight': 'border',
              'font-family': "'Inconsolata', monospace"
          });
@@ -453,7 +461,7 @@
          svg3.append("text").text("產業外勞從事3k行業比例")
              .attr("transform", "translate(-90,0)")
              .attr({
-                 "font-size": "16px",
+                 "font-size": "1vw",
                  "font-weight": "bold",
                  "font-family": "'Noto Sans TC', sans-serif"
              });
@@ -480,7 +488,7 @@
          svg4.append("text").text("社福外勞從事看護工比例")
              .attr("transform", "translate(-90,0)")
              .attr({
-                 "font-size": "16px",
+                 "font-size": "1vw",
                  "font-weight": "bold",
                  "font-family": "'Noto Sans TC', sans-serif"
 
@@ -499,6 +507,7 @@
              .attr('width', 10)
              .attr("height", 10)
              .attr("fill", function (d, i) {
+                
                  if (i < 4)
                      return color1[i];
                  else if (i < 6)
@@ -532,7 +541,7 @@
                      return "translate(250," + (14 + 18 * (i - 4)) + ")";
              })
              .attr({
-                 "font-size": "12px",
+                 "font-size": "1vw",
                  "font-weight": "bold"
              });
 
@@ -695,7 +704,7 @@
                              return xScale(d.年分);
                          },
                          'fill': "black",
-                         'font-size': '12px',
+                         'font-size': '1vw',
                          'font-weight': 'bold',
                          'font-family': "'Inconsolata', monospace",
                          'visibility': 'hidden',
@@ -744,25 +753,21 @@
                          return (20 + (i + 1) * 30)
                      },
                      'fill': "gray",
-                     'font-size': '12px',
+                     'font-size': '1vw',
                      'font-weight': 'bold',
                      'font-family': "'Inconsolata', monospace"
                  });
-
+            var religion = [];
+            religion.push("伊斯蘭教","天主教","佛教","佛教");
              //逐年變動
              TimeLine.selectAll('text')
                  .on('mouseover', function (d, i) {
-                     //total text
-                     
-                     if (Number(d.總計) < Number(d.原住民)) {
-                         $("#desc").text(d.年分 + "在台外籍移工達 " + d.總計 + " 人");
-
-                     } else {
-                         $("#desc").html(d.年分 + "在台外籍移工達 " + d.總計 + " 人</br>" + "已超越原住民人數 " + d.原住民);
-                     }
+                     d3.selectAll("text").attr({
+                        'font-size': "1vw",
+                    });
                      //bigger circle
                      d3.select(this).attr({
-                         'font-size': "20px"
+                         'font-size': "1.5vw",
                      });
                      svg1.selectAll("g").selectAll("path")
                          .transition().duration(20000).ease('poly', '3')
@@ -800,11 +805,10 @@
 
                  })
                  .on('mouseout', function (d, i) {
-                     d3.select(this).attr({
-                         'font-size': "12px"
-                     });
+                     
                      svg1.selectAll("g").selectAll("path").on("mouseover", function (d, i, j) {
                          d3.selectAll("path").attr("opacity", 0.7);
+                         $("#religion").html(religion[i]);
                          d3.select(this).attr("opacity", 1).attr("d", function (d) {
                              return arc.innerRadius(60).outerRadius(95)(d);
                          })
@@ -887,7 +891,17 @@
 
      });
 
-
+     $(function() {
+        $(window).scroll(function() {
+            var scrollVal = $(this).scrollTop();
+            console.log(scrollVal);
+            if (scrollVal > 1320 && scrollVal<2000) {
+                $('#timeLine').css('visibility', 'visible');
+            } else {
+                $('#timeLine').css('visibility', 'hidden');
+            }
+        });
+    });
      // /*chartbar*/
      // var w = 560;
      // var h = 300;
